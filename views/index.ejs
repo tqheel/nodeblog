@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+  </head>
+  <body ng-controller="AppController as vm">
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <div ng-repeat="post in vm.posts">
+        <div>{{ post.title }}</div>
+        <div>{{ post.body }}</div>
+        <hr/>
+    </div>
+    <script>
+        var app = angular.module('app', [])
+                .controller('AppController', AppController);
+
+        function AppController(){
+            var vm = this;
+
+            vm.posts = [
+                {
+                    id: 1,
+                    title: "This is post title 1",
+                    body: "This is post 1 body."
+                },
+                {
+                    id: 2,
+                    title: "This is post title 2",
+                    body: "This is post 2 body."
+                },
+                {
+                    id: 3,
+                    title: "This is post title 3",
+                    body: "This is post 3 body."
+                }
+            ];
+        }
+
+    </script>
+  </body>
+</html>
