@@ -1,0 +1,133 @@
+
+<header>
+	<hgroup>
+		<h2>CSS3 Transforms</h2>
+		<h3>November 2, 2014</h3>
+	</hgroup>
+</header>
+<section class="post-body">
+    <p>
+    	I've been studying for the MS 70-480 exam (building web apps with HTML5, JavaScript, and CSS3), recently. My employer asked me to take the exam this year, because the more certified developers that the
+    	company has, the greater the benefits to the company on MSDN subscriptions and software licenses. I hate standardized tests, and historically, have not done 
+    	very well. Consequently, I was pretty skeptical that I would get much personal benefit out of the exam prep. However, I have been pleasantly surprised by the many insights I am gaining into the inner-workings of magical frameworks like jQuery, KnockoutJS, and AngularJS.
+    </p>
+    <p>
+    	Since I learn more by doing, than by rote memorization, I've been typing out all of the examples from the study guide that I have been reading. I figure as 
+    	long as I am doing that, I may as well post some of the examples to the ol' blog along the way.
+    </p>
+    <p>
+    	With that in mind, you will find below some examples of some CSS3 transformations that you can accomplish with just a few lines of code. There's nothing mind-blowing here, but perhaps you might come to understand that one does not always need to rely on some heavy framework to do basic DOM manipulation.
+    </p>
+    <div>
+    	<div>
+    		<style>
+				.orange{
+					height: 150px;
+					width: 225px;
+				}
+				.trans1 {
+					transform: translate(100px,0px);
+					-webkit-transition: -webkit-transform 3s ease-in;
+				}
+				.trans2{
+					transform: scale(1.05);
+					-webkit-transition: -webkit-transform 3s ease-in;
+				}
+				.trans3{
+					transform: scale(.25);
+					-webkit-transition: -webkit-transform 3s ease-in;
+				}
+				.trans4{
+					transform: rotate(45deg);
+					-webkit-transition: -webkit-transform 3s ease-in;
+				}
+				.trans5{
+					transform: rotate(-45deg);
+					-webkit-transition: -webkit-transform 3s ease-in;
+				}
+				.trans6{
+					transform: skew(110deg,10deg);
+					-webkit-transition: -webkit-transform 3s ease-in;
+				}
+			</style>
+			<script>
+				function translateMe(){
+					var image = document.getElementById('orange1');
+					image.classList.add('trans1');
+				}
+				function scaleMeUp(){
+					var image = document.getElementById('orange2');
+					image.classList.remove('trans3');
+					image.classList.add('trans2');
+				}
+				function scaleMeDown(){
+					var image = document.getElementById('orange2');
+					image.classList.remove('trans2');
+					image.classList.add('trans3');
+				}
+				function rotateMeRight(){
+					var image = document.getElementById('orange3');
+					image.classList.remove('trans5');
+					image.classList.add('trans4');
+				}
+				function rotateMeLeft(){
+					var image = document.getElementById('orange3');
+					image.classList.remove('trans4');
+					image.classList.add('trans5');
+				}
+				function skewMe(){
+					var image = document.getElementById('orange4');
+					image.classList.remove('trans6');
+					image.classList.add('trans6');
+				}
+				function fixMe(){
+					var image = document.getElementById('orange4');
+					image.classList.remove('trans6');
+				}
+			</script>
+    		<h4>CSS3 Transform Examples</h4>
+			<div><b>Translate: Move Image 100 Pixels to the Right</b></div>
+    		<article>
+				<div>
+					<img class="orange" src="posts/img/orange.jpg" alt="" id="orange1" style="position: relative"/>
+				</div>
+				<div>
+					<button class=" btn btn-default" onclick="translateMe()">Move</button>
+				</div>
+    		</article>
+    		<article>
+    			<div><b>Scale: Scale the Image Up and Down</b></div>
+    			<div>
+					<img class="orange" src="posts/img/orange.jpg" alt="" id="orange2" style="position: relative"/>
+				</div>
+				<div>
+					<button class=" btn btn-default" onclick="scaleMeUp()">Scale Up</button>
+					<button class=" btn btn-default" onclick="scaleMeDown()">Scale Down</button>
+				</div>
+    		</article>
+    		<article>
+    			<div><b>Rotate: Rotate the Image 45 Degrees</b></div>
+    			<div>
+					<img class="orange" src="posts/img/orange.jpg" alt="" id="orange3" style="position: relative"/>
+				</div>
+				<div>
+					<button class=" btn btn-default" onclick="rotateMeRight()">Rotate Right</button>
+					<button class=" btn btn-default" onclick="rotateMeLeft()">Rotate Left</button>
+				</div>
+    		</article>
+    		<article>
+    			<div><b>Skew: Make the Image All Messed-Up</b></div>
+    			<div>
+					<img class="orange" src="posts/img/orange.jpg" alt="" id="orange4" style="position: relative"/>
+				</div>
+				<div>
+					<button class=" btn btn-default" onclick="skewMe()">Mess-Up</button>
+					<button class=" btn btn-default" onclick="fixMe()">Fix</button>
+				</div>
+    		</article>
+    		And the source code for doing all of this coolness...
+    		<gist id="b32a11342f14b0e84478"></gist>
+    		
+    	</div>
+    </div>
+</section>
