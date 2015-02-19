@@ -30,7 +30,7 @@ module.exports = function(dir, next){
                             fileName: element,
                             ext: path.extname(element),
                             content: data,
-                            createDate: new Date(stats.birthtime).getDate()
+                            createDate: new Date(stats.birthtime).getTime()
                         });
                         console.log('Finished processing file ' + element);
                         callback();
