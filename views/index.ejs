@@ -3,40 +3,88 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>-->
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/angular-sanitize.min.js"></script>
+    <script src="/js/angular-gist.min.js"></script>
+
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular-sanitize.js"></script>-->
   </head>
   <body ng-controller="AppController as vm">
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     <div ng-repeat="post in vm.posts">
-        <div>{{ post.title }}</div>
-        <div>{{ post.body }}</div>
+        <div ng-bind-html="vm.sanitizeHtml(post.body)"></div>
         <hr/>
     </div>
     <script>
-        var app = angular.module('app', [])
+        var app = angular.module('app', ['ngSanitize', 'gist'])
+                .factory('contentService', contentService)
                 .controller('AppController', AppController);
 
-        function AppController(){
-            var vm = this;
+        contentService.$inject = ['$http', '$q'];
 
-            vm.posts = [
-                {
-                    id: 1,
-                    title: "This is post title 1",
-                    body: "This is post 1 body."
-                },
-                {
-                    id: 2,
-                    title: "This is post title 2",
-                    body: "This is post 2 body."
-                },
-                {
-                    id: 3,
-                    title: "This is post title 3",
-                    body: "This is post 3 body."
-                }
-            ];
+        AppController.$inject = ['contentService', '$sce'];
+
+        function contentService($http, $q){
+
+            function getPosts(){
+                return $http({
+                    method: 'GET',
+                    url: './posts',
+                    data: {}
+                }).then(function(response){
+                    return angular.fromJson(response.data);
+                }, function(reason){
+                    console.log(reason);
+                    return $q.reject(reason);
+                });
+            }
+
+            return {
+                getPosts: getPosts
+            }
+        }
+
+        function AppController(contentService, $sce){
+            var vm = this;
+            vm.posts = [];
+
+            function getPosts(){
+                contentService.getPosts()
+                        .then(function(result){
+                            vm.posts = result;
+                        },function(reason){
+                            vm.posts = [{body: 'There was an error getting posts: '+ reason}];
+                        });
+            }
+
+            vm.sanitizeHtml = function(postBody){
+                return $sce.trustAsHtml(postBody);
+            };
+
+            function init(){
+                getPosts();
+            }
+            init();
+
+//            vm.posts = [
+//                {
+//                    id: 1,
+//                    title: "This is post title 1",
+//                    body: "This is post 1 body."
+//                },
+//                {
+//                    id: 2,
+//                    title: "This is post title 2",
+//                    body: "This is post 2 body."
+//                },
+//                {
+//                    id: 3,
+//                    title: "This is post title 3",
+//                    body: "This is post 3 body."
+//                }
+//            ];
         }
 
     </script>

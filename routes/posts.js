@@ -9,7 +9,7 @@ var _ = require('underscore');
 
 router.get('/', function(req, res, next) {
     console.log('Getting files...');
-    getFiles('./content/published', function(err, files){
+    getFiles('./public/content/published', function(err, files){
 
         if(err){
             err.status = 500;
@@ -26,11 +26,9 @@ router.get('/', function(req, res, next) {
                     err.status = 500;
                     next(err);
                 }else{
-                    //sort the files in descending order, assuming each file has a hidden html input element #id with time-coded value
-                    contentArray = _.sortBy(contentArray, 'id').reverse();
                     console.log('Router has received file contents from content handler and is assigning file contents to http response as JSON. Yippie kai yay, mofo!');
-                    res = JSON.stringify(contentArray);
-                    next(res);
+                    //sort the files in descending order, assuming each file has a hidden html input element #id with time-coded value
+                    res.send(JSON.stringify(_.sortBy(contentArray, 'id').reverse()));
                 }
             });
 
