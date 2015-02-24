@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html ng-app="teqblog">
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
@@ -18,7 +18,7 @@
         <hr/>
     </div>
     <script>
-        var app = angular.module('app', ['ngSanitize', 'gist'])
+        var teqblog = angular.module('teqblog', ['ngSanitize', 'gist'])
                 .factory('contentService', contentService)
                 .controller('AppController', AppController);
 
