@@ -7,4 +7,7 @@ The current version under the master branch is incomplete but should contain a c
 
 If you would like to see the work in progress that may not actually compile, checkout the dev branch (literally and figuratively).
 
-Enjoy.
+# Known Issues
+- When deployed to remote host on MS Azure, posts are not received by Angular controller due to path resolution issues for backend code on remote host.
+- Embedded JS functions within individual posts are somehow out of scope and therefore result in undefined errors.
+- "Gist" Angular directive for displaying GitHub Gists does not work.
