@@ -9,7 +9,7 @@ var _ = require('underscore');
 
 router.get('/', function(req, res, next) {
     console.log('Getting files...');
-    getFiles('./public/content/published', function(err, files){
+    getFiles('../public/content/published', function(err, files){
 
         if(err){
             err.status = 500;
