@@ -11,3 +11,4 @@ If you would like to see the work in progress that may not actually compile, che
 - When deployed to remote host on MS Azure, posts are not received by Angular controller due to path resolution issues for backend code on remote host.
 - Embedded JS functions within individual posts are somehow out of scope and therefore result in undefined errors.
 - "Gist" Angular directive for displaying GitHub Gists does not work.
+- I forgot to gitignore the bower and node dependencies before I commited this repo to Github. Clearly, I need to clean that up. Sorry!
